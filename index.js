@@ -9,6 +9,9 @@ var server = app.listen(8080, function(){
 app.use(express.static("public"));
 var io = socket(server);
 
-io.on("conncetion", function(){
-
+io.on("connection", function(s){
+    console.log("socket connected: "+s);
+    s.on("q", (data)=>{
+        io.sockets.emit("add", (data));
+    });
 });
